@@ -1,0 +1,22 @@
+.content-contact-left {
+  background-image: url(/public/assests/imageVideo/catrun2.jpg);
+  width: 100%;
+  height: 537px;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+  margin-top: 40px;
+}
+.contact {
+  min-height: 100vh;
+}
+
+.content-left button {
+  box-sizing: border-box;
+}
+
+.content-left button:hover {
+  background-color: azure;
+}

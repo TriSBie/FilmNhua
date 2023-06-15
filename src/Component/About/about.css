@@ -1,0 +1,21 @@
+.about {
+  min-height: 100vh;
+}
+.about-content {
+  background-image: url(/public/assests/imageVideo/chase.jpg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  transition: 0.3s ease-in;
+  z-index: 0;
+  opacity: 1;
+}
+
+.about-content-body {
+  position: absolute;
+  z-index: 1;
+  top: 35%;
+  left: 5%;
+  right: 50%;
+}
