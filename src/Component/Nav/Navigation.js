@@ -1,6 +1,5 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import "./styleHeader.css";
-import { ThemeContext } from "../ThemeContext/ThemeContext";
 // Import MUI Switch button
 import Switch from "@mui/material/Switch";
 import { Link } from "react-router-dom";
@@ -17,6 +16,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import MovieSharpIcon from "@mui/icons-material/MovieSharp";
+import AuthContext from "../AuthContext/AuthContext";
+import { Stack } from "@mui/material";
 
 const label = { inputProps: { "aria-label": "Color switch demo" } };
 
@@ -24,7 +25,8 @@ const pages = ["Home", "About", "Contact"];
 const settings = ["Profile", "Account", "Logout"];
 
 export default function Navigation() {
-  const value = useContext(ThemeContext);
+
+  const account = useContext(AuthContext)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -51,6 +53,8 @@ export default function Navigation() {
     setAnchorElUser(null);
   };
 
+
+
   function getAccordingActionURL(page) {
     if (page === "Home") {
       return "/";
@@ -61,6 +65,7 @@ export default function Navigation() {
     }
   }
   return (
+
     <AppBar position="static" sx={{ borderRadius: "0 0 30px 30px" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -115,8 +120,8 @@ export default function Navigation() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -143,8 +148,8 @@ export default function Navigation() {
             FilmNhua
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link to={getAccordingActionURL(page)} key={page}>
+            {pages.map((page, index) => (
+              <Link to={getAccordingActionURL(page)} key={index}>
                 <Button
                   key={page}
                   // onClick={() => handleCloseNavMenu(page)}
@@ -161,7 +166,7 @@ export default function Navigation() {
             ))}
           </Box>
 
-          <Box
+          {/* <Box
             sx={{
               marginRight: "20px",
             }}
@@ -174,39 +179,59 @@ export default function Navigation() {
               onChange={value.toggle}
             />
             <b>{value.dark ? "Light" : "Dark"}</b>
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          </Box> */}
+          <Box sx={{ flexGrow: 0, width: 300 }}>
+            <div id="buttonDiv" />
+            {account.value.user !== null &&
+              <>
+                <Stack direction={'row'} spacing={2} sx={{
+                  justifyContent: 'center', alignContent: 'center'
+                }}>
+                  <Typography variant="h6" paddingTop={1}>
+                    Welcome, {account.value.user.name}
+                  </Typography>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar sx={{ width: 45, height: 45 }} alt="Remy Sharp" src={account.value.user.picture} />
+                    </IconButton>
+                  </Tooltip>
+                </Stack>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting, index) => {
+                    if (setting === 'Logout') {
+                      return <MenuItem MenuItem key={index} onClick={() => {
+                        handleCloseUserMenu()
+                        account.value.handleLogOut()
+                      }} >
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    } else {
+                      return <MenuItem MenuItem key={index} onClick={handleCloseUserMenu} >
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    }
+                  })}
+                </Menu>
+              </>}
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 
   /*

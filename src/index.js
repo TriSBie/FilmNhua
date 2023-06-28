@@ -1,15 +1,18 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./Component/ThemeContext/ThemeContext";
+import { FunctionProvider } from "./Component/FunctionContext/FunctionContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <ThemeProvider>
-      <App />
+      <FunctionProvider>
+        <App />
+      </FunctionProvider>
     </ThemeProvider>
   </BrowserRouter>
 );

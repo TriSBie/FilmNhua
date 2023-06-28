@@ -9,6 +9,7 @@ export default function ListOfFilmsPresentation({
   newUpdatedFilm,
   listFilms,
 }) {
+
   const settings = {
     dots: true,
     infinite: true,
@@ -21,9 +22,9 @@ export default function ListOfFilmsPresentation({
       <div className="row hotFilmRelease">
         <h3> Hotest Film </h3>
         <Slider {...settings}>
-          {hotFilm.map((film) => (
-            <Link to={`detail/${film.id}`} key={film.id}>
-              <div className="card-cover card" key={film.id} title={film.title}>
+          {hotFilm.map((film, index) => (
+            <Link to={`detail/${film.id}`} key={index} listFilm={listFilms}>
+              <div className="card-cover card" title={film.title}>
                 <div
                   className="player-btn"
                 >
@@ -40,9 +41,9 @@ export default function ListOfFilmsPresentation({
       <div className="row newUpdatedFilm">
         <h3> New update Film </h3>
         <Slider {...settings}>
-          {newUpdatedFilm.map((film) => (
-            <Link to={`detail/${film.id}`} key={film.id}>
-              <div className="card-cover card" key={film.id}>
+          {newUpdatedFilm.map((film, index) => (
+            <Link to={`detail/${film.id}`} key={index} listFilm={listFilms}>
+              <div className="card-cover card">
                 <div
                   className="player-btn"
                 >
@@ -58,12 +59,13 @@ export default function ListOfFilmsPresentation({
         <div className="row">
           <h3>List of Films</h3>
         </div>
-        {listFilms.map((listFilm) => (
+        {listFilms.map((listFilm, index) => (
           <div
             key={listFilm.id}
             className="column col-md-4 col-sm-4 col-md-3 col-xl-2"
           >
-            <Link to={`detail/${listFilm.id}`} key={listFilm.id}>
+
+            <Link to={`detail/${listFilm.id}`} key={index} listFilm={listFilms}>
               <div
                 className="card"
                 style={{ minHeight: "380px" }}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ListOfFilms } from "../../Shared/ListOfFilms";
 import ModalFilmCase from "../Modal/ModalFilmCase";
 // import Slider from "react-slick";
 // import { Link } from "react-router-dom";
@@ -41,27 +40,24 @@ export default function Details() {
       },
     ],
   };
+
   // const [filmDetail, setFilmDetail] = useState({});
   // const [listRecommendedFilm, setListRecommended] = useState([]);
   const [isShow, setShow] = useState(false);
   const filmsID = useParams();
-  const id = parseInt(filmsID.id);
-  const filmItem = ListOfFilms.find((film) => id === film.id);
-  /* const recommendFilms = () => {
-  //   let filmList = [];
-  //   while (numElement > 0) {
-  //     const randomNum = Math.floor(Math.random() * 24);
-  //     if (!filmList.includes(ListOfFilms[randomNum])) {
-  //       filmList.push(ListOfFilms[randomNum]);
-  //       numElement--;
-  //     }
-  //   }
-  //   return filmList;
-  // };
-
-  // useEffect(() => {
-  //   setListRecommended(recommendFilms);
-  // }, [filmsID])*/
+  const [filmItem, setFilmItem] = useState({});
+  useEffect(() => {
+    fetch(`https://6493c0730da866a95366a9e5.mockapi.io/Films/film_storage/${filmsID.id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP RESPONSE IS ERROR AT CODE ${response.status}`)
+        }
+        return response.json();
+      })
+      .then(result => {
+        setFilmItem(result)
+      })
+  }, [filmsID])
   return (
     <div className="row">
       <div className="box-film">
@@ -112,35 +108,16 @@ export default function Details() {
           <div className="col-9">
             <div className="content-right">
               <div className="wrapper-img">
-                <img src={`.${filmItem.imgVd}`}></img>
+                <img src={`.${filmItem.imgVd}`} alt=""></img>
                 <div className="icon-wrapper" onClick={() => setShow(true)}>
                   <PlayCircleFilledWhiteIcon className="icon_play"></PlayCircleFilledWhiteIcon>
                 </div>
-                {/* <div className="outner-film">
-                  <h4>Recommend other film</h4>
-                  <div>
-                    <Slider {...settings}>
-                      {listRecommendedFilm.map((film) => (
-                        <Link to={`details/${film.id}`} key={film.id}>
-                          <div className="" key={film.id}>
-                            <div className="player-btn" onClick={() => {}}>
-                              <i className="fa-solid fa-play"></i>
-                            </div>
-                            <div className="img_wrapper">
-                              <img src={`.${film.img}`} alt={film.title}></img>
-                            </div>
-                          </div>
-                        </Link>
-                      ))}
-                    </Slider>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
         </div>
       </div>
       {isShow && <ModalFilmCase filmItem={filmItem} setShow={setShow} />}
-    </div>
+    </div >
   );
 }

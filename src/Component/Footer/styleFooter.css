@@ -1,12 +1,13 @@
-.footer {
+.container-footer {
   padding: 7px 10px;
   border-radius: 30px 30px 0 0;
   font-size: 15px;
   /* margin-top: 100px; */
   color: white;
   border: 1px solid;
+  margin-top: 80px;
   /* background-image: url("/demo/public/assests/images/footer.jpg"); */
-  background-color: #247CD4;
+  background-color: #247cd4;
 }
 
 .row .justify-content-center {

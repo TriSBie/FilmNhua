@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./styleBody.css";
 // import Swiper JS
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -31,14 +31,14 @@ export default function BodyContent({ sliderFilm }) {
           <SwiperSlide key={film.id}>
             <div
               className="wrapperImg"
-              // style={{
-              //   backgroundImage: `linear-gradient(to right bottom,rgba(0, 0, 0, 0.44),rgba(0, 0, 0, 0.715)), url(${film.imgBanner})`,
-              //   backgroundPosition: "center",
-              //   backgroundRepeat: "no-repeat",
-              //   backgroundSize: "contain",
-              // }}
+            // style={{
+            //   backgroundImage: `linear-gradient(to right bottom,rgba(0, 0, 0, 0.44),rgba(0, 0, 0, 0.715)), url(${film.imgBanner})`,
+            //   backgroundPosition: "center",
+            //   backgroundRepeat: "no-repeat",
+            //   backgroundSize: "contain",
+            // }}
             >
-              <img src={`.${film.imgBanner}`}></img>
+              <img alt="" src={`${film.imgBanner}`}></img>
             </div>
             <div className="banner-body">
               <div className="row">
@@ -57,32 +57,6 @@ export default function BodyContent({ sliderFilm }) {
             </div>
           </SwiperSlide>
         ))}
-
-        {/* <SwiperSlide>
-          <div className="wrapperImg">
-            <img src="/assests/imageSlider/2.jpg"></img>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="wrapperImg">
-            <img src="/assests/imageSlider/3.jpg"></img>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="wrapperImg">
-            <img src="/assests/imageSlider/4.jpg"></img>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="wrapperImg">
-            <img src="/assests/imageSlider/5.jpg"></img>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="wrapperImg">
-            <img src="/assests/imageSlider/6.jpg"></img>
-          </div>
-        </SwiperSlide> */}
       </Swiper>
     </div>
   );
