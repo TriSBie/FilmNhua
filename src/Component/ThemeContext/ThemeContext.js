@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 const themesApp = {
   dark: {
-
     backgroundColor: "#FDFEFE",
     color: "white",
   },
@@ -19,10 +18,15 @@ const themesCont = {
   },
   light: {
     backgroundColor: `#E9EFF4`,
-
     color: "dark",
   },
 };
+
+// const themeAdmin = {
+//   dark : {
+
+//   }
+// }
 
 const initialTheme = {
   dark: false,

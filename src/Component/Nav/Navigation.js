@@ -182,7 +182,7 @@ export default function Navigation() {
           </Box> */}
           <Box sx={{ flexGrow: 0, width: 300 }}>
             <div id="buttonDiv" />
-            {account.value.user !== null &&
+            {Object.keys(account.value.user).length !== 0 &&
               <>
                 <Stack direction={'row'} spacing={2} sx={{
                   justifyContent: 'center', alignContent: 'center'

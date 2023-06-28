@@ -23,7 +23,7 @@ function AuthProvider({ children }) {
     const handleLogOut = (e) => {
         setUser({});
         document.getElementById('buttonDiv').hidden = false;
-        setUser(null)
+        setUser({})
         setIsAdmin(false)
         localStorage.clear()
     }
