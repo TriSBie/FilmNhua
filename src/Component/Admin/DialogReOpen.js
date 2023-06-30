@@ -67,7 +67,7 @@ export default function DialogDel({ dataFilm, open, setOpen }) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Disagree</Button>
-                    <Button onClick={() => functionContext.handleReOpenDisplay(dataFilm.id, setOpen)
+                    <Button onClick={() => functionContext.value.handleReOpenDisplay(dataFilm.id, setOpen)
                     }
                         autoFocus
                     >

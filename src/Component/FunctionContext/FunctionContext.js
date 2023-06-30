@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { AuthProvider } from '../AuthContext/AuthContext';
 
 
@@ -7,8 +7,8 @@ const FunctionContext = createContext();
 function FunctionProvider({ children }) {
     const baseURL = `https://6493c0730da866a95366a9e5.mockapi.io/Films/film_storage`
     const [reload, setReload] = useState(false)
+    const [init, setInit] = useState({});
 
-    //function handle create
     const createFilm = (values, setOpen) => {
         async function createNewFilm(values) {
             try {
@@ -99,13 +99,15 @@ function FunctionProvider({ children }) {
                     "writers": values.writers,
                     "nation": values.nation,
                     "content": values.content,
+                    "director": values.director,
                     "feature": {
                         "isHot": values.feature.isHot === null ? false : values.feature.isHot,
                         "isNewUpdate": values.feature.isNewUpdate === null ? false : values.feature.isNewUpdate,
                         "isSlider": values.feature.isSlider === null ? false : values.feature.isSlider
                     },
                     "embeddedURL": values.embeddedURL,
-                    "imgVd": values.imgVd
+                    "imgVD": values.imgVD,
+                    "imgBanner": values.imgBanner
                 })
             });
 
@@ -152,18 +154,24 @@ function FunctionProvider({ children }) {
     }
 
 
-    const functionInit = {
-        baseURL: baseURL,
-        reload: reload,
-        createNewFilm: createFilm,
-        handleDisableDisplay: handleDisableDisplay,
-        handleReOpenDisplay: handleReOpenDisplay,
-        handleDelete: handleDelete,
-        handleEdit: handleEdit
-    }
+    useEffect(() => {
+        const functionInit = {
+            baseURL: baseURL,
+            reload: reload,
+            createNewFilm: createFilm,
+            handleDisableDisplay: handleDisableDisplay,
+            handleReOpenDisplay: handleReOpenDisplay,
+            handleDelete: handleDelete,
+            handleEdit: handleEdit
+        }
+        setInit(functionInit)
+    }, [reload])
+
     return (
         <FunctionContext.Provider value={
-            functionInit
+            {
+                value: init
+            }
         }>
             <AuthProvider>
                 {children}

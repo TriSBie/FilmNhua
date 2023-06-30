@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./styleBody.css";
 // import Swiper JS
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,16 +10,25 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-export default function BodyContent({ sliderFilm }) {
+// import Button from '@mui/material-next/Button';
+
+export default function BodyContent({ listFilms }) {
+
+  const sliderFilm = useMemo(() => {
+    return listFilms.filter((film) => film.feature["isSlider"] === true)
+  }, [listFilms])
+
+
+  console.log(sliderFilm)
   return (
-    <div className="row slider">
+    <div className="row slider" >
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 3000,
+        //   disableOnInteraction: false,
+        // }}
         pagination={{
           clickable: true,
         }}
@@ -28,21 +37,68 @@ export default function BodyContent({ sliderFilm }) {
         className="mySwiper"
       >
         {sliderFilm.map((film) => (
-          <SwiperSlide key={film.id}>
-            <div
-              className="wrapperImg"
-            // style={{
-            //   backgroundImage: `linear-gradient(to right bottom,rgba(0, 0, 0, 0.44),rgba(0, 0, 0, 0.715)), url(${film.imgBanner})`,
-            //   backgroundPosition: "center",
-            //   backgroundRepeat: "no-repeat",
-            //   backgroundSize: "contain",
-            // }}
-            >
-              <img alt="" src={`${film.imgBanner}`}></img>
-            </div>
-            <div className="banner-body">
-              <div className="row">
-                <div className="col">
+          <>
+            <SwiperSlide key={film.id}>
+              <div
+                className="swippedWrapper"
+                style={{
+                  backgroundImage: `url(${film.imgBanner})`,
+                  display: "flex",
+                  borderRadius: "1rem",
+                  height: "30rem",
+                  width: "100 %",
+                  overflow: "hidden",
+                  position: "relative",
+                  transition: "border .3s, background .3s",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center center",
+                }}
+              >
+                <div className="infor">
+                  <div className="top">
+                    <div className="title">
+                      {film.title}
+                    </div>
+                  </div>
+                  <div className="bottom">
+                    <Link to={`detail/${film.id}`}>
+                      <Button
+                        sx={{
+                          border: '1px solid #ecececec',
+                          color: '#fff'
+                        }}
+                        size="large"
+                        variant="outlined"
+                      >Watch Now</Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* <img alt="" src={`${film.imgBanner}`} />
+              </div>
+              <div className="banner-body">
+                <div className="row">
+                  <div className="banner-content">
+                    <h3>{`${film.title} (${film.year}) - ${film.nation}`}</h3>
+                    <span>{film.content}</span>
+                    <Link to={`detail/${film.id}`}>
+                      <Stack spacing={2} direction="row">
+                        <Button variant="contained">Detail</Button>
+                      </Stack>
+                    </Link>
+                  </div>
+                </div>
+              </div> */}
+            </SwiperSlide >
+            {/* <SwiperSlide key={film.id}>
+              <div
+                className="wrapperImg"
+              >
+                <img alt="" src={`${film.imgBanner}`} />
+              </div>
+              <div className="banner-body">
+                <div className="row">
                   <div className="banner-content">
                     <h3>{`${film.title} (${film.year}) - ${film.nation}`}</h3>
                     <span>{film.content}</span>
@@ -54,10 +110,10 @@ export default function BodyContent({ sliderFilm }) {
                   </div>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
+            </SwiperSlide> */}
+          </>
         ))}
       </Swiper>
-    </div>
+    </div >
   );
 }

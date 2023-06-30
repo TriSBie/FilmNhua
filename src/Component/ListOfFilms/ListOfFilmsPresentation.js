@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./styleListFilm.css";
 import { Link } from "react-router-dom";
 //col-6 col-sm-4 col-md-3 col-xl-2
 import Slider from "react-slick";
+import FunctionContext from "../FunctionContext/FunctionContext";
 
 export default function ListOfFilmsPresentation({
-  hotFilm,
-  newUpdatedFilm,
-  listFilms,
+  listFilms
 }) {
+
+  const newUpdatedFilm = useMemo(() => {
+    return listFilms.filter((film) => film.feature["isNewUpdate"] === true)
+  }, [listFilms])
+
+  const hotFilm = useMemo(() => {
+    return listFilms.filter((film) => film.feature["isHot"] === true)
+  }, [listFilms])
 
   const settings = {
     dots: true,
@@ -19,7 +26,9 @@ export default function ListOfFilmsPresentation({
   };
   return (
     <div className="row container-film">
-      <div className="row hotFilmRelease">
+      <div className="row hotFilmRelease" style={{
+        marginBottom: '30px'
+      }}>
         <h3> Hotest Film </h3>
         <Slider {...settings}>
           {hotFilm.map((film, index) => (
@@ -38,7 +47,9 @@ export default function ListOfFilmsPresentation({
           ))}
         </Slider>
       </div>
-      <div className="row newUpdatedFilm">
+      <div className="row newUpdatedFilm" style={{
+        marginBottom: '30px'
+      }}>
         <h3> New update Film </h3>
         <Slider {...settings}>
           {newUpdatedFilm.map((film, index) => (
@@ -55,7 +66,7 @@ export default function ListOfFilmsPresentation({
           ))}
         </Slider>
       </div>
-      <div className="row listFilm">
+      {/* <div className="row listFilm">
         <div className="row">
           <h3>List of Films</h3>
         </div>
@@ -87,7 +98,7 @@ export default function ListOfFilmsPresentation({
             </Link>
           </div>
         ))}
-      </div>
-    </div>
+      </div> */}
+    </div >
   );
 }

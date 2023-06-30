@@ -19,7 +19,7 @@
 
 .card {
   position: relative;
-  transition: 0.2s ease-in;
+  transition: 0.5s ease-in;
 }
 
 .player-btn {
@@ -83,7 +83,7 @@
 .hotFilmRelease,
 .newUpdatedFilm,
 .listFilm {
-  margin: 10px 0;
+  margin: 10px 10px;
 }
 
 .card-cover {

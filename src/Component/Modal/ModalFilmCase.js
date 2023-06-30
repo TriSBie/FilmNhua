@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import "./styleModal.css"
-export default function ModalFilmCase({ filmItem, setShow }) {
+export default function ModalDetail({ filmItem, setShow }) {
   const handleClose = () => {
     setShow(false);
   };
@@ -36,7 +36,7 @@ export default function ModalFilmCase({ filmItem, setShow }) {
           <iframe
             width="974"
             height="500"
-            src={`https://www.youtube.com/embed/${filmItem.embeddedURL}`}
+            src={`${filmItem.embeddedURL}`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

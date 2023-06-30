@@ -13,9 +13,6 @@
   line-height: 1.5;
 }
 
-.card-content {
-}
-
 .card-content ul {
   padding: 0 15px;
 }
@@ -23,23 +20,17 @@
 .card-content ul li {
   list-style: none;
 }
-.content-left {
-}
 
 .content-right {
   background: transparent;
   border: none;
 }
-.wrapper-body {
+/* .wrapper-body {
   /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); */
-}
-.wrapper-body h4 {
+*/ .wrapper-body h4 {
   text-align: start;
 }
 
-.card-img-cover {
-  padding: 10px;
-}
 .card-img-cover img {
   width: 100%;
   border-radius: 8px;
@@ -75,6 +66,11 @@
   background-color: #ffffff;
 }
 
+.wrappedDetail {
+  border-radius: 8px;
+  padding: 20px;
+  background: #ececec;
+}
 .wrapper-body .row {
   width: 100%;
   margin: 0;
@@ -120,5 +116,3 @@
 .content-right {
   height: 100%;
 }
-
-
