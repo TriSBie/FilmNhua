@@ -36,9 +36,9 @@ export default function BodyContent({ listFilms }) {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {sliderFilm.map((film) => (
+        {sliderFilm.map((film, index) => (
           <>
-            <SwiperSlide key={film.id}>
+            <SwiperSlide key={index}>
               <div
                 className="swippedWrapper"
                 style={{
