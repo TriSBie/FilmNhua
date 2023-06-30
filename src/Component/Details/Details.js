@@ -1,48 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ModalDetail from "../Modal/ModalFilmCase";
 // import Slider from "react-slick";
 // import { Link } from "react-router-dom";
 import "./styleDetail.css";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
-import { Backdrop, CircularProgress } from "@mui/material";
-export default function Details() {
+import { Backdrop, Box, Button, CircularProgress, CssBaseline, Typography } from "@mui/material";
+import { Container } from "postcss";
+export default function Details({ listFilm }) {
   const [isLoading, setIsLoading] = useState(true)
-
-  var settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
 
   // const [filmDetail, setFilmDetail] = useState({});
   // const [listRecommendedFilm, setListRecommended] = useState([]);
@@ -61,6 +27,7 @@ export default function Details() {
         setFilmItem(result)
         setIsLoading(false)
       })
+    console.log("First here")
   }, [filmsID])
   return (
     <>
@@ -70,13 +37,53 @@ export default function Details() {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      {isLoading && <div className="row" style={{
-        minHeight: '100vh'
-      }}>
 
+      {isLoading && <div className="row" style={{
+        minHeight: '50vh'
+      }}>
       </div>}
+      {!isLoading && filmItem.display === false &&
+        <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} textAlign={'center'} alignContent={'center'}>
+          <Typography
+            variant="h4"
+            component={'h5'}
+          >
+            Film with ID: {filmsID.id} is does not exists at current
+          </Typography>
+          <Box
+            sx={{
+              backgroundImage: `url(https://www.elegantthemes.com/blog/wp-content/uploads/2020/02/000-404.png)`,
+              position: 'relative',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'top center',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              width: '100%',
+              height: '100%'
+            }}
+          >
+            {/* <img src="https://www.elegantthemes.com/blog/wp-content/uploads/2020/02/000-404.png">
+            </img> */}
+            <Link to={"/"}>
+              <Button sx={{
+                position: 'absolute',
+                top: '40%',
+                right: '38%'
+              }}
+                size="large"
+                variant="contained"
+                color="primary"
+              >
+                Go home
+              </Button>
+            </Link>
+          </Box>
+        </Box>
+      }
       {
-        !isLoading &&
+        !isLoading && filmItem.display !== false &&
         <div className="row">
           <div className="box-film">
             <div className="row">

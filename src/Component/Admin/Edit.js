@@ -60,6 +60,9 @@ const style = {
     overflow: 'hidden'
 };
 
+const changeImmediatelyImage = (data1, data2) => {
+    return data1 === data2 ? data1 : data2
+}
 
 export default function Edit({ dataFilm, open, setOpen }) {
     const functionContext = React.useContext(FunctionContext)
@@ -153,7 +156,9 @@ export default function Edit({ dataFilm, open, setOpen }) {
                             <CardMedia
                                 component={"img"}
                                 alt=''
-                                src={dataFilm.img}
+                                src={
+                                    changeImmediatelyImage(dataFilm.img, formik.values.img)
+                                }
                                 sx={{
                                     width: '100%',
                                     height: '450px',
