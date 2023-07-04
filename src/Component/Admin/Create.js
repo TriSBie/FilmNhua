@@ -78,7 +78,6 @@ export default function Create() {
                                 width: '60%'
                             }}>
                                 <TextField //INPUT TITLE
-                                    autoFocus
                                     label='Title'
                                     fullWidth
                                     name='title'

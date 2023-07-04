@@ -46,7 +46,7 @@ export default function BodyContent({ listFilms }) {
                   display: "flex",
                   borderRadius: "1rem",
                   height: "30rem",
-                  width: "100 %",
+                  width: "100%",
                   overflow: "hidden",
                   position: "relative",
                   transition: "border .3s, background .3s",
@@ -65,7 +65,11 @@ export default function BodyContent({ listFilms }) {
                       <Button
                         sx={{
                           border: '1px solid #ecececec',
-                          color: '#fff'
+                          color: '#fff',
+                          zIndex: '9',
+                          '&:hover': {
+                            color: '#1976D2'
+                          }
                         }}
                         size="large"
                         variant="outlined"
